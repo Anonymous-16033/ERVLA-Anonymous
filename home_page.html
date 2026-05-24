@@ -769,6 +769,49 @@
     .tldr-box p {
       color: #5e503d !important;
     }
+    .real-world-preview {
+      padding: 1.25rem;
+    }
+    .real-world-preview .title {
+      margin-bottom: 1rem;
+    }
+    .real-world-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .real-world-demo-card {
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(255, 253, 247, 0.82);
+      border: 1px solid rgba(173, 125, 48, 0.18);
+      box-shadow: 0 10px 24px rgba(92, 67, 26, 0.10);
+    }
+    .real-world-demo-card video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #f4e5c3;
+    }
+    .real-world-demo-caption {
+      padding: 0.85rem 0.95rem 1rem;
+    }
+    .real-world-demo-label {
+      margin-bottom: 0.35rem;
+      color: #8a5b16;
+      font-weight: 700;
+    }
+    .real-world-demo-instruction {
+      margin: 0;
+      color: #4d4335;
+      line-height: 1.45;
+    }
+    @media screen and (max-width: 900px) {
+      .real-world-demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .hero.is-light.is-small {
       background: linear-gradient(180deg, rgba(255, 245, 220, 0.78), rgba(255, 250, 238, 0.25));
     }
@@ -902,20 +945,55 @@
 </div>
 
 
-<!-- TLDR Section -->
+<!-- Real-world preview Section -->
 <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <div class="tldr-box" style="background: linear-gradient(135deg, #fffaf0 0%, #f6e8c9 100%); 
-                                    border-left: 5px solid #c4922f; 
-                                    padding: 20px; 
-                                    border-radius: 8px; 
-                                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-          <h2 class="title is-4" style="color: #5a3d14; margin-bottom: 10px;">TL;DR:</h2>
-          <p class="is-size-5" style="color: #5e503d; line-height: 1.6;">
-            We revisit embodied chain-of-thought as reasoning pre-training for robotic control and introduce ERVLA, a reasoning-capable VLA that internalizes action-oriented reasoning into continuous-action policies without requiring mandatory test-time CoT decoding.
-          </p>
+        <div class="tldr-box real-world-preview">
+          <h2 class="title is-4">Real-World Instruction Following</h2>
+          <div class="real-world-demo-grid">
+            <article class="real-world-demo-card">
+              <video controls muted playsinline preload="metadata">
+                <source src="static/videos/real-world/Basic_move_toyx3.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+              </video>
+              <div class="real-world-demo-caption">
+                <div class="real-world-demo-label">Basic</div>
+                <p class="real-world-demo-instruction">Put the toy car into the drawer.</p>
+              </div>
+            </article>
+            <article class="real-world-demo-card">
+              <video controls muted playsinline preload="metadata">
+                <source src="static/videos/real-world/Distractor_move_toy.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+              </video>
+              <div class="real-world-demo-caption">
+                <div class="real-world-demo-label">Distractor</div>
+                <p class="real-world-demo-instruction">Put the toy into the drawer.</p>
+              </div>
+            </article>
+            <article class="real-world-demo-card">
+              <video controls muted playsinline preload="metadata">
+                <source src="static/videos/real-world/Semantic_lower_drawer.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+              </video>
+              <div class="real-world-demo-caption">
+                <div class="real-world-demo-label">Semantic</div>
+                <p class="real-world-demo-instruction">Put the toy into the lower drawer.</p>
+              </div>
+            </article>
+            <article class="real-world-demo-card">
+              <video controls muted playsinline preload="metadata">
+                <source src="static/videos/real-world/Long_move_toy.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="real-world-demo-caption">
+                <div class="real-world-demo-label">Long</div>
+                <p class="real-world-demo-instruction">Put the non-toy items into the upper drawer, and put the toys into the second drawer.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </div>
