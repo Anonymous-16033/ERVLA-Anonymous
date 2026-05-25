@@ -947,6 +947,98 @@
       flex-shrink: 0;
     }
 
+    /* ===== EMBODIED COT EXAMPLE ===== */
+    .ecot-example {
+      margin: 2rem 0 1.5rem;
+      padding: 1.5rem 1.75rem;
+      border-radius: 14px;
+      background: rgba(255, 253, 247, 0.95);
+      border: 1px solid rgba(173, 125, 48, 0.22);
+      box-shadow: 0 8px 24px rgba(92, 67, 26, 0.08);
+    }
+    .ecot-example-header {
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(173, 125, 48, 0.15);
+    }
+    .ecot-example-header .title.is-4 {
+      color: var(--heading-primary);
+      margin-bottom: 0.5rem !important;
+    }
+    .ecot-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .ecot-meta span {
+      background: rgba(196, 146, 47, 0.12);
+      padding: 2px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(173, 125, 48, 0.18);
+    }
+    .ecot-block {
+      padding: 1rem 1.15rem;
+      margin-bottom: 0.85rem;
+      border-radius: 10px;
+      background: rgba(255, 248, 232, 0.65);
+      border: 1px solid rgba(173, 125, 48, 0.14);
+    }
+    .ecot-block:last-child {
+      margin-bottom: 0;
+    }
+    .ecot-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #c4922f, #e8b455);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 20px;
+      margin-bottom: 0.55rem;
+    }
+    .ecot-block p {
+      margin: 0.35rem 0 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .ecot-block ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-primary);
+    }
+    .ecot-block li {
+      margin-bottom: 0.2rem;
+    }
+    .ecot-block li.ecot-current {
+      font-weight: 600;
+      color: #8a5b16;
+    }
+    .ecot-block details {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .ecot-block summary {
+      cursor: pointer;
+      color: #8a5b16;
+      font-weight: 600;
+    }
+    .ecot-waypoints {
+      margin-top: 0.4rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
     /* ===== VIDEO BACKGROUND HERO ===== */
     .top-spotlight {
       overflow: hidden !important;
@@ -1250,6 +1342,68 @@
             <div class="content has-text-centered">
               <img src="static/images/Overview.png" alt="Embodied CoT dataset overview" width="100%" style="max-width: 1200px; height: auto;"/>
               <p>Figure 1: Embodied CoT dataset and reasoning supervision overview.</p>
+            </div>
+          </div>
+
+          <div class="ecot-example">
+            <div class="ecot-example-header">
+              <h3 class="title is-4">Structured CoT Example</h3>
+              <p class="ecot-meta">
+                <span>t = 16</span>
+                <span>DROID</span>
+                <span>Subtask 2 / 9</span>
+                <span>Frames 12–71</span>
+              </p>
+            </div>
+
+            <div class="ecot-block">
+              <span class="ecot-tag">Instruction</span>
+              <p>Pick up the clothes from the table and put them in the box.</p>
+            </div>
+
+            <div class="ecot-block">
+              <span class="ecot-tag">Understanding</span>
+              <p><strong>Goal:</strong> Pick up the clothes from the table and put them in the box.</p>
+            </div>
+
+            <div class="ecot-block">
+              <span class="ecot-tag">Grounding</span>
+              <p><strong>Visible objects (cam0):</strong></p>
+              <ul>
+                <li><strong>box</strong> — [553, 173, 830, 534]</li>
+                <li><strong>table</strong> — [131, 373, 966, 989]</li>
+                <li><strong>tripod</strong> — [21, 192, 168, 453]</li>
+              </ul>
+            </div>
+
+            <div class="ecot-block">
+              <span class="ecot-tag">Planning</span>
+              <p><strong>Current subtask:</strong> contact and lift first cloth</p>
+              <p><strong>Subtask reasoning:</strong> The robot arm is positioned above the table, approaching the first cloth located to the left of the orange box. No objects have been moved yet. The gripper is open and preparing to make contact with the cloth. The next action is to lower the arm and close the gripper to grasp the cloth.</p>
+              <details>
+                <summary>Full plan (9 subtasks)</summary>
+                <ul>
+                  <li>Approach first cloth</li>
+                  <li class="ecot-current">contact and lift first cloth</li>
+                  <li>Transport first cloth to box</li>
+                  <li>Release first cloth into box</li>
+                  <li>Retract and reposition after first drop</li>
+                  <li>Approach second cloth</li>
+                  <li>contact and lift second cloth</li>
+                  <li>Transport second cloth to box</li>
+                  <li>Release second cloth into box</li>
+                </ul>
+              </details>
+            </div>
+
+            <div class="ecot-block">
+              <span class="ecot-tag">Acting</span>
+              <p><strong>Movement:</strong> move forward 3 cm, move left 5 cm, move down 3 cm, tilt forward 10 degrees, rotate clockwise 10 degrees, keep gripper open</p>
+              <p><strong>Gripper pose (cam0):</strong> [533, 388]</p>
+              <details>
+                <summary>Point trajectory (10 waypoints, cam0)</summary>
+                <p class="ecot-waypoints">[527, 385] → [521, 383] → [513, 382] → [504, 380] → [495, 379] → [484, 379] → [474, 382] → [464, 387] → [454, 394] → [443, 402]</p>
+              </details>
             </div>
           </div>
 
@@ -1627,220 +1781,6 @@
 </section>
 
 
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Embodied CoT Analysis</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <p>
-            We first study which embodied CoT fields are actually useful for action learning. Isolated high-level understanding fields such as goal, planning, subtask, and reasoning provide limited gains or even reduce performance when used alone. In contrast, action-oriented fields such as movement and point trajectories improve control more directly. The strongest results appear when semantic understanding is coupled with concrete action guidance, indicating that effective embodied CoT must bridge task intent and executable motion.
-          </p>
-
-          <div class="box" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div class="content has-text-centered">
-              <img src="static/images/Diffusion_steps.png" alt="Embodied CoT analysis" width="100%" style="max-width: 1200px; height: auto;"/>
-              <p>Figure 3: Embodied CoT analysis. Action-oriented reasoning signals are more useful than high-level explanations alone, and reasoning dropout helps reduce contamination from noisy grounded supervision.</p>
-            </div>
-          </div>
-
-          <p>
-            We further identify CoT contamination: dense but inaccurate grounded labels, especially unstable bounding boxes and drifting gripper coordinates, can overwrite useful representations and harm control. Reasoning dropout reduces this failure mode by making explicit CoT optional during training and encouraging the model to internalize reasoning into action-relevant hidden states.
-          </p>
-
-          <div class="video-carousel" id="vc-robustness-images" style="margin-top: 1rem;">
-            <div class="box" style="padding: 0.75rem;">
-              <div class="carousel-slide active">
-                <img src="static/images/Video predictions1.png" alt="Visualization of video predictions 1">
-              </div>
-              <div class="carousel-slide">
-                <img src="static/images/Video predictions2.png" alt="Visualization of video predictions 2">
-              </div>
-              <div class="carousel-slide">
-                <img src="static/images/Video predictions3.png" alt="Visualization of video predictions 3">
-              </div>
-              <div class="carousel-slide">
-                <img src="static/images/Video predictions4.png" alt="Visualization of video predictions 4">
-              </div>
-              <div class="carousel-slide">
-                <img src="static/images/Video predictions5.png" alt="Visualization of video predictions 5">
-              </div>
-              <div class="carousel-slide">
-                <img src="static/images/Video predictions6.png" alt="Visualization of video predictions 6">
-              </div>
-            </div>
-            <button class="carousel-btn carousel-prev">&#10094;</button>
-            <button class="carousel-btn carousel-next">&#10095;</button>
-            <div class="carousel-dots">
-              <span class="dot active"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <p class="has-text-centered" style="margin-top: 0.75rem;">Figure 4: Qualitative reasoning examples. ERVLA treats embodied CoT as training-time semantic guidance that can be switched on, sparsely refreshed, or omitted at inference.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Ablation Studies</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <p>
-            We conduct ablation studies to evaluate how embodied CoT should interact with continuous-action policies. The results show that explicit CoT alone does not scale reliably when treated as an autoregressive prefix for action decoding. Instead, ERVLA improves when reasoning supervision and action losses jointly shape the VLM representation.
-          </p>
-
-          <p>
-            Removing the choice branch weakens action-aware representation shaping, while knowledge isolation blocks action gradients from updating the VLM backbone and limits reasoning-action co-adaptation. Removing knowledge truncation lets DiT attend to synthetic control-query tokens, which can introduce shortcut learning and reduce robustness.
-          </p>
-
-          <p>
-            The final ERVLA design combines explicit linguistic CoT, reasoning dropout, choice-based action shaping, knowledge truncation, and cache-conditioned diffusion. This enables embodied CoT to scale as representation supervision instead of becoming a brittle decoding burden.
-          </p>
-
-          <div class="box" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div class="content has-text-centered table-showcase">
-              <div class="table-scroll">
-                <table class="paper-table compact">
-                  <thead>
-                    <tr>
-                      <th>Design</th>
-                      <th>End-to-End</th>
-                      <th>Choice Branch</th>
-                      <th>Knowledge Truncation</th>
-                      <th class="avg-col">LIBERO-Plus</th>
-                      <th class="avg-col">VLABench SR</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="ours-row">
-                      <td>ERVLA (Ours)</td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td class="avg-col best">86.9</td>
-                      <td class="avg-col best">53.2</td>
-                    </tr>
-                    <tr>
-                      <td>Choice + No Knowledge Truncation</td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td><span class="bool-no">-</span></td>
-                      <td class="avg-col">84.7</td>
-                      <td class="avg-col">47.2</td>
-                    </tr>
-                    <tr>
-                      <td>No Choice + Knowledge Isolation</td>
-                      <td><span class="bool-no">-</span></td>
-                      <td><span class="bool-no">-</span></td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td class="avg-col">76.5</td>
-                      <td class="avg-col">42.6</td>
-                    </tr>
-                    <tr>
-                      <td>No Choice (End-to-End)</td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td><span class="bool-no">-</span></td>
-                      <td><span class="bool-yes">✓</span></td>
-                      <td class="avg-col">61.9</td>
-                      <td class="avg-col">39.2</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>Table 3: Ablation study of ERVLA design choices. The choice branch injects action-level discrimination into the VLM, while knowledge truncation gives DiT a cleaner semantic memory for continuous-action generation.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Scaling and Real-World Transfer</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <p>
-            ERVLA shows that embodied CoT can scale when it is used to shape representations rather than as a literal action prefix. With the choice branch, knowledge truncation, and end-to-end flow supervision, performance improves steadily as embodied CoT pre-training data increases on both LIBERO-Plus and VLABench.
-          </p>
-          <p>
-            In real-world experiments, ERVLA is trained on approximately 10 hours of demonstrations covering object pick-and-place, drawer opening and closing, and tabletop waste clearing. The evaluation spans Basic, Distractors, Semantic, and Long-horizon tiers, with five instructions per tier and five trials per instruction.
-          </p>
-          <p>
-            The largest gains appear under semantic ambiguity, distractors, and long-horizon dependencies. These results support the central conclusion of the paper: real-world robustness depends not only on stronger low-level action generation, but on whether reasoning supervision is converted into grounded, action-aware representations that remain useful under out-of-distribution semantic and temporal shifts.
-          </p>
-
-          <div class="box" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div class="content has-text-centered table-showcase">
-              <div class="table-scroll">
-                <table class="paper-table compact" style="min-width: 560px;">
-                  <thead>
-                    <tr>
-                      <th>Tier</th>
-                      <th>What It Tests</th>
-                      <th>ERVLA Advantage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="row-label">Basic</td>
-                      <td>Clean scenes with explicit object names</td>
-                      <td>Comparable strong low-level execution</td>
-                    </tr>
-                    <tr>
-                      <td class="row-label">Distractors</td>
-                      <td>Irrelevant or visually similar objects</td>
-                      <td>More robust grounding under clutter</td>
-                    </tr>
-                    <tr>
-                      <td class="row-label">Semantic</td>
-                      <td>Attribute, function, and spatial-reference instructions</td>
-                      <td class="best">Stronger language-to-action reasoning</td>
-                    </tr>
-                    <tr>
-                      <td class="row-label">Long-horizon</td>
-                      <td>Multi-object and multi-step execution</td>
-                      <td class="best">Better temporal and semantic consistency</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>Table 4: Real-world task tiers used to evaluate ERVLA. The model is strongest when semantic understanding and long-horizon execution must be grounded into action.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer class="footer">
   <!-- <div class="container"> -->
     <div class="content has-text-centered">
@@ -1858,70 +1798,7 @@
 </footer>
 
 
-<script>
-const showcaseCarouselIds = ['vc-btn-press', 'vc-door-open', 'vc-faucet-close', 'vc-cook', 'vc-push-t', 'vc-put-lion'];
 
-function createShowcaseViewLabels() {
-  const row = document.createElement('div');
-  row.className = 'showcase-view-labels';
-  row.setAttribute('aria-hidden', 'true');
-  row.innerHTML = `
-    <span class="view-chip view-1">View 1</span>
-    <span class="view-chip view-2">View 2</span>
-    <span class="view-chip view-3">View 3</span>
-    <span class="view-chip view-1">View 1</span>
-    <span class="view-chip view-2">View 2</span>
-    <span class="view-chip view-3">View 3</span>
-    <span class="ghost-slot"></span>
-    <span class="ghost-slot"></span>
-  `;
-  return row;
-}
-
-showcaseCarouselIds.forEach(function(id) {
-  const carousel = document.getElementById(id);
-  if (!carousel) return;
-  carousel.querySelectorAll('.carousel-slide').forEach(function(slide) {
-    if (slide.querySelector('.showcase-view-labels')) return;
-    const media = slide.querySelector('video, img');
-    if (!media) return;
-    slide.insertBefore(createShowcaseViewLabels(), media);
-  });
-});
-
-document.querySelectorAll('.video-carousel').forEach(function(carousel) {
-  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
-  const dots   = Array.from(carousel.querySelectorAll('.dot'));
-  let current  = 0;
-
-  function showSlide(n) {
-    const prev = slides[current].querySelector('video');
-    if (prev) {
-      prev.pause();
-    }
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = ((n % slides.length) + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    const vid = slides[current].querySelector('video');
-    if (vid) {
-      vid.currentTime = 0;
-      vid.play();
-    }
-  }
-
-  carousel.querySelector('.carousel-prev').addEventListener('click', function(e){
-    e.stopPropagation(); showSlide(current - 1);
-  });
-  carousel.querySelector('.carousel-next').addEventListener('click', function(e){
-    e.stopPropagation(); showSlide(current + 1);
-  });
-  dots.forEach(function(dot, i){
-    dot.addEventListener('click', function(){ showSlide(i); });
-  });
-});
-</script>
 
 
 </body>
