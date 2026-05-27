@@ -1721,6 +1721,21 @@
             </div>
           </div>
 
+          <h2 class="title is-3 has-text-centered">VLM-to-VLA Transfer and CoT Scaling</h2>
+          <p class="has-text-justified">
+            We study whether embodied CoT can turn stronger vision-language models into stronger action policies, and whether this supervision scales with more pre-training data. On diverse VLM backbones evaluated under a unified interface, performance without explicit CoT shows only weak or even negative correlation with VLM capability on LIBERO and VLABench. With embodied CoT supervision, stronger VLMs transfer more reliably: the best results are dominated by the Qwen3-VL family, indicating that CoT acts as a transfer interface that converts semantic priors into action-relevant representations rather than merely adding extra text.
+          </p>
+          <p class="has-text-justified">
+            Naive autoregressive CoT plus action-token decoding does not scale reliably as more robot CoT data is added. ERVLA instead uses CoT as representation-shaping supervision together with a choice branch, knowledge truncation, and flow-based action learning. As embodied CoT pre-training grows from 35M to 226.3M samples, ERVLA improves steadily on both LIBERO-Plus and VLABench, whereas autoregressive CoT+FAST and isolated VLM+DiT baselines show weaker or saturated scaling.
+          </p>
+
+          <div class="box" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="content has-text-centered">
+              <img src="static/images/ablation.png" alt="VLM-to-VLA transfer and embodied CoT scaling" width="100%" style="max-width: 1200px; height: auto;"/>
+              <p>Figure 3: VLM-to-VLA transfer and embodied CoT scaling. <strong>Left:</strong> ECoT better aligns VLM capability with action. <strong>Right:</strong> ERVLA scales steadily with more CoT data on both LIBERO-Plus and VLABench, whereas AR CoT+FAST and isolated VLM+DiT show weaker or saturated scaling.</p>
+            </div>
+          </div>
+
           <!-- Real-World Evaluation Section -->
           <h2 class="title is-3 has-text-centered">Real-World Evaluation</h2>
           <p class="has-text-justified">
@@ -1779,23 +1794,6 @@
     </div>
   </div>
 </section>
-
-
-<footer class="footer">
-  <!-- <div class="container"> -->
-    <div class="content has-text-centered">
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p style="text-align: center;">
-          Website template adapted from public academic project pages.
-          </p>
-        </div>
-      </div>
-    </div>
-  <!-- </div> -->
-</footer>
 
 
 
